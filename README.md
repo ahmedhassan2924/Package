@@ -5,4 +5,4 @@ A reusable Firebase and Firestore integration package for React, React Native, A
 ## Installation
 
 ```bash
-npm install git+https://github.com/your-username/Package.git
+npm install git+https://github.com/ahmedhassan2924/Package.git
