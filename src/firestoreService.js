@@ -1,50 +1,30 @@
-const { collection, getDocs, addDoc, doc, getDoc, updateDoc, deleteDoc } = require('firebase/firestore');
-const { getFirestoreDb } = require('./firebaseConfig');
+// firestoreService.js
+import { collection, getDocs, addDoc, doc, setDoc, deleteDoc } from "firebase/firestore";
+import { db } from "./firebaseConfig";
 
-// Fetch all documents from a collection
-const getCollectionData = async (collectionName) => {
-  const db = getFirestoreDb();
-  const querySnapshot = await getDocs(collection(db, collectionName));
-  return querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+// Function to fetch all documents from a collection
+export const fetchCollection = async (collectionName) => {
+  const colRef = collection(db, collectionName);
+  const snapshot = await getDocs(colRef);
+  const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+  return data;
 };
 
-// Fetch a single document by ID
-const getDocumentById = async (collectionName, id) => {
-  const db = getFirestoreDb();
-  const docRef = doc(db, collectionName, id);
-  const docSnapshot = await getDoc(docRef);
-  if (docSnapshot.exists()) {
-    return { id: docSnapshot.id, ...docSnapshot.data() };
-  } else {
-    throw new Error('Document not found');
-  }
-};
-
-// Add a new document to a collection
-const addDocument = async (collectionName, data) => {
-  const db = getFirestoreDb();
-  const docRef = await addDoc(collection(db, collectionName), data);
+// Function to add a new document
+export const addDocument = async (collectionName, data) => {
+  const colRef = collection(db, collectionName);
+  const docRef = await addDoc(colRef, data);
   return docRef.id;
 };
 
-// Update an existing document
-const updateDocument = async (collectionName, id, data) => {
-  const db = getFirestoreDb();
-  const docRef = doc(db, collectionName, id);
-  await updateDoc(docRef, data);
+// Function to update a document
+export const updateDocument = async (collectionName, docId, data) => {
+  const docRef = doc(db, collectionName, docId);
+  await setDoc(docRef, data, { merge: true });
 };
 
-// Delete a document by ID
-const deleteDocument = async (collectionName, id) => {
-  const db = getFirestoreDb();
-  const docRef = doc(db, collectionName, id);
+// Function to delete a document
+export const deleteDocument = async (collectionName, docId) => {
+  const docRef = doc(db, collectionName, docId);
   await deleteDoc(docRef);
-};
-
-module.exports = {
-  getCollectionData,
-  getDocumentById,
-  addDocument,
-  updateDocument,
-  deleteDocument,
 };

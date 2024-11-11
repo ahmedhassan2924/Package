@@ -1,34 +1,18 @@
-const { initializeApp } = require('firebase/app');
-const { getAuth } = require('firebase/auth');
-const { getFirestore } = require('firebase/firestore');
+// firebaseConfig.js
+import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore";
 
-let firebaseApp;
-let firebaseAuth;
-let firestoreDb;
-
-// Function to initialize Firebase
-const initializeFirebase = (config) => {
-  if (!firebaseApp) {
-    firebaseApp = initializeApp(config);
-    firebaseAuth = getAuth(firebaseApp);
-    firestoreDb = getFirestore(firebaseApp);
-  }
+// Replace with your Firebase project config
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_AUTH_DOMAIN",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_STORAGE_BUCKET",
+  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+  appId: "YOUR_APP_ID"
 };
 
-// Get Firebase Auth instance
-const getFirebaseAuth = () => {
-  if (!firebaseAuth) throw new Error('Firebase has not been initialized');
-  return firebaseAuth;
-};
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
-// Get Firestore instance
-const getFirestoreDb = () => {
-  if (!firestoreDb) throw new Error('Firebase has not been initialized');
-  return firestoreDb;
-};
-
-module.exports = {
-  initializeFirebase,
-  getFirebaseAuth,
-  getFirestoreDb,
-};
+export { app, db };
