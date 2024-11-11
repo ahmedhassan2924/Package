@@ -1,5 +1,15 @@
-const { initializeFirebase, getFirebaseAuth, getFirestoreDb } = require('./firebaseConfig');
-const { getCollectionData, getDocumentById, addDocument, updateDocument, deleteDocument } = require('./firestoreService');
+const {
+  initializeFirebase,
+  getFirebaseAuth,
+  getFirestoreDb,
+} = require("./firebaseConfig");
+const {
+  getCollectionData,
+  getDocumentById,
+  addDocument,
+  updateDocument,
+  deleteDocument,
+} = require("./firestoreService");
 
 module.exports = {
   initializeFirebase,

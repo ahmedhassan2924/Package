@@ -1,16 +1,22 @@
 {
-  "name": "package",
+  "name": "firebase-firestore-package",
   "version": "1.0.0",
   "main": "index.js",
+  "type": "commonjs",
+  "files": ["index.js"],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["firebase", "firestore", "react-native", "react"],
+  "author": "Ahmed Hassan",
   "license": "ISC",
-  "description": "",
+  "description": "A package for Firebase and Firestore integration",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ahmedhassan2924/firebase-firestore-package.git"
+  },
   "dependencies": {
     "firebase": "^11.0.1"
   }
-  
 }
+
